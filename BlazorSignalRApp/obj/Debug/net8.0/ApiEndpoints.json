@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "BlazorSignalRApp.Server.Controllers.ChatApiController",
+    "Method": "Ping",
+    "RelativePath": "api/ChatApi/ping",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlazorSignalRApp.Server.Controllers.ChatApiController",
+    "Method": "SendMessage",
+    "RelativePath": "api/ChatApi/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "message",
+        "Type": "BlazorSignalRApp.Server.Controllers.ChatMessage",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
