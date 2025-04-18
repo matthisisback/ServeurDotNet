@@ -84,3 +84,7 @@ C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp
 C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp\obj\Debug\net8.0\BlazorSignalRApp.genruntimeconfig.cache
 C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp\obj\Debug\net8.0\ref\BlazorSignalRApp.dll
 C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp\bin\Debug\net8.0\nlog.config
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp\bin\Debug\net8.0\NLog.dll
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp\bin\Debug\net8.0\NLog.Extensions.Logging.dll
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp\bin\Debug\net8.0\NLog.Web.AspNetCore.dll

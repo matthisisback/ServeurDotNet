@@ -1,11 +1,52 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace BlazorSignalRApp.Hubs;
-
-public class ChatHub : Hub
+namespace BlazorSignalRApp.Hubs
 {
-    public async Task SendMessage(string user, string message)
+    public class ChatHub : Hub
     {
-        await Clients.All.SendAsync("ReceiveMessage", user, message);
+        private static int _userCount = 0;
+        private static Dictionary<string, string> _users = new();
+        private static List<(string user, string message)> _history = new();
+
+        public override async Task OnConnectedAsync()
+        {
+            _userCount++;
+            string newUserId = $"User_{_userCount}";
+            _users[Context.ConnectionId] = newUserId;
+
+            string systemMessage = $"<----------- utilisateur {newUserId} connecté ------------->";
+            await Clients.All.SendAsync("ReceiveMessage", "System", systemMessage);
+
+            // Envoie l'historique complet uniquement au client qui vient de se connecter
+            foreach (var (user, msg) in _history)
+            {
+                await Clients.Caller.SendAsync("ReceiveMessage", user, msg);
+            }
+
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            if (_users.TryGetValue(Context.ConnectionId, out var userId))
+            {
+                string systemMessage = $"<----------- utilisateur {userId} déconnecté ------------->";
+                await Clients.All.SendAsync("ReceiveMessage", "System", systemMessage);
+
+                _users.Remove(Context.ConnectionId);
+            }
+
+            await base.OnDisconnectedAsync(exception);
+        }
+
+        public async Task SendMessage(string user, string message)
+        {
+            // Sauvegarde dans l’historique (max 100 messages)
+            _history.Add((user, message));
+            if (_history.Count > 100)
+                _history.RemoveAt(0);
+
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
     }
 }

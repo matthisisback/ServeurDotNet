@@ -1086,6 +1086,7 @@ C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp
 C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\refint\BlazorSignalRApp.Client.dll
 C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\BlazorSignalRApp.Client.pdb
 C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\ref\BlazorSignalRApp.Client.dll
-C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\compressed\ode9tygryg-tsa96nh1ok.gz
-C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\compressed\c7n0yyprkr-v69vpzt0xb.gz
-C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\compressed\xteuqltjvz-s8j6imxavq.gz
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\compressed\ode9tygryg-gz74npuh7t.gz
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\compressed\c7n0yyprkr-5rlulggtux.gz
+C:\Users\matthis\source\repos\BlazorSignalRApp\BlazorSignalRApp\BlazorSignalRApp.Client\obj\Debug\net8.0\compressed\xteuqltjvz-9sdia2zecz.gz

@@ -2,6 +2,7 @@
 @rendermode InteractiveWebAssembly
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager Navigation
+@inject IJSRuntime JS
 @implements IAsyncDisposable
 
 <PageTitle>Chat</PageTitle>
@@ -31,36 +32,64 @@
 
 @code {
     private HubConnection? hubConnection;
-    private List<string> messages = [];
+    private List<string> messages = new();
     private string? userInput;
     private string? messageInput;
+    private string userId;
+    private bool _isInitialized = false;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        hubConnection = new HubConnectionBuilder()
-            .WithUrl(Navigation.ToAbsoluteUri("/chathub"))
-            .Build();
-
-        hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+        if (!_isInitialized)
         {
-            var encodedMsg = $"{user}: {message}";
-            messages.Add(encodedMsg);
-            InvokeAsync(StateHasChanged);
-        });
+            _isInitialized = true;
 
-        await hubConnection.StartAsync();
+            await InitUserId();
+
+            userInput = userId; // auto-remplit le champ "User:" avec l'ID
+
+            hubConnection = new HubConnectionBuilder()
+                .WithUrl(Navigation.ToAbsoluteUri("/chathub"))
+                .Build();
+
+            hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+            {
+                var encodedMsg = $"{user}: {message}";
+                messages.Add(encodedMsg);
+                InvokeAsync(StateHasChanged);
+            });
+
+            await hubConnection.StartAsync();
+            await hubConnection.SendAsync("RegisterUser", userId);
+
+            StateHasChanged(); // force l'affichage si besoin
+        }
+    }
+
+    private async Task InitUserId()
+    {
+        var savedId = await JS.InvokeAsync<string>("localStorage.getItem", "chatUserId");
+        if (string.IsNullOrWhiteSpace(savedId))
+        {
+            userId = $"User_{Guid.NewGuid().ToString().Substring(0, 6)}"; // Ex: User_f4a1c2
+            await JS.InvokeVoidAsync("localStorage.setItem", "chatUserId", userId);
+        }
+        else
+        {
+            userId = savedId;
+        }
     }
 
     private async Task Send()
     {
-        if (hubConnection is not null)
+        if (hubConnection is not null && !string.IsNullOrWhiteSpace(messageInput))
         {
             await hubConnection.SendAsync("SendMessage", userInput, messageInput);
+            messageInput = string.Empty;
         }
     }
 
-    public bool IsConnected =>
-        hubConnection?.State == HubConnectionState.Connected;
+    public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
 
     public async ValueTask DisposeAsync()
     {
