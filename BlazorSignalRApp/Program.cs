@@ -1,5 +1,6 @@
 ﻿using BlazorSignalRApp.Components;
 using BlazorSignalRApp.Hubs;
+using BlazorSignalRApp.Services;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,9 @@ builder.Services.AddResponseCompression(opts =>
 
 // Ajout des contrôleurs (API)
 builder.Services.AddControllers();
+//BDD
+builder.Services.AddSingleton<ChatStorageService>();
+
 
 var app = builder.Build();
 
